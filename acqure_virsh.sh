@@ -1,4 +1,7 @@
 #!/bin/bash
+# creates a virsh pod in maas
+# usage: ./acquire_virsh.sh <ip address>
+# this assumes you are using maas admin profile
 
 # check if machine and command is okay
 status=$(maas admin machines read | jq --arg ip "$1" '.[] | select(.ip_addresses==[$ip]) | .status_name')
@@ -129,4 +132,7 @@ vncserver
 EOF
 
 # create a pod 
-sudo maas admin pods create type=virsh power_address=qemu+ssh://ubuntu@$1/system
+pod_name=$(maas admin machines read | jq -r --arg ip "$1" '.[] | select(.ip_addresses==[$ip]) | .hostname')-pod
+maas_status=$(maas admin pods create type=virsh power_address=qemu+ssh://ubuntu@$1/system name=$pod_name)
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo "Success. Pod created as $pod_name"
