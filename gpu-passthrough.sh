@@ -9,7 +9,8 @@ then
 fi
 EOF
 
-pci_id=$(ssh ubuntu@$1 "lspci -nn | grep -i '3d controller' | awk '{ print \$12 }' | sed s/[^a-z0-9:]//g")
+pci_id=$(ssh ubuntu@$1 "lspci -nn | grep -i '3d controller' | grep -o '\[[a-z0-9]*\:[a-z0-9]*\]' | sort --unique" | sed "s/\[//g; s/\]//g")
+
 if ! [[ $pci_id ]] 
 then
 	echo "error: no gpus found"
