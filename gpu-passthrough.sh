@@ -72,3 +72,5 @@ do
 	count=$(($count + 1))
 	echo "$template" | sed s/aaa/$bus/ | sed s/bbb/$slot/ | sed s/ccc/$func/ | ssh ubuntu@$1 "cat > ~/gpu-$bus-$slot-$func.xml"
 done
+
+ssh ubuntu@$1 "ls ~/"

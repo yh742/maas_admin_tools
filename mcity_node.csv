@@ -1,7 +1,7 @@
 hostname,vcpu,memory(MB),storage(GB),tags,attachments
 kmaster-1,2,16000,32,kmaster
 kmaster-2,2,16000,32,kmaster
-kworker-1,8,48000,100,kworker,gpu-05-00-0.xml
+kworker-1,8,48000,100,kworker
 kworker-2,8,48000,100,kworker
 kworker-3,8,48000,100,kworker
 kworker-4,8,48000,100,kworker
