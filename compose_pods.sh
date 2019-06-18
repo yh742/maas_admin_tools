@@ -36,7 +36,13 @@ do
 	echo "----------------vm details-------------------"
 	echo $name,$vcpu,$memory,$storage,$tag,$attachment
 	echo "---------------------------------------------"
-	output=$(maas admin pod compose $pod_id hostname=$name cores=$vcpu memory=$memory storage=$storage)
+	output=''
+	if [ -z "$attachment" ] 
+	then
+		output=$(maas admin pod compose $pod_id hostname=$name cores=$vcpu memory=$memory storage=$storage)
+	else
+		output=$(maas admin pod compose $pod_id hostname=$name cores=$vcpu memory=$memory storage=$storage,$attachment)
+	fi
 	echo $output
 	system_id=$(echo "$output" | jq -r .system_id)
 	echo "system id: "$system_id

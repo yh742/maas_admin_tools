@@ -9,9 +9,9 @@ kubeapi-lb,2,16000,16,kaux
 cephmon-1,2,32000,32,ceph-mon
 cephmon-2,2,32000,32,ceph-mon
 cephmon-3,2,32000,32,ceph-mon
-cephosd-1,4,16000,200,ceph-osd
-cephosd-2,4,16000,200,ceph-osd
-cephosd-3,4,16000,200,ceph-osd
+cephosd-1,4,16000,200,ceph-osd,1000
+cephosd-2,4,16000,200,ceph-osd,1000
+cephosd-3,4,16000,200,ceph-osd,1000
 cephfs-1,8,32000,32,ceph-fs
 kibana-1,2,16000,48,kibana
 elasticsearch-1,4,32000,400,elasticsearch
