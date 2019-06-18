@@ -40,9 +40,9 @@ virt-xml <vm> --edit --vcpu sockets=1,cores=8,threads=1
 virsh virsh attach-device <vm> --file <xml filename>.xml --config
 ```
 ## TODO
-# Add automation for GPU passthrough in pod compose
-# Add options for multiple disk attachment in pod compose
-# Tune CPUs (unfortunately, numad doesn't seem to work on Ubuntu) this should look like:
+- Add automation for GPU passthrough in pod compose
+- Add options for multiple disk attachment in pod compose
+- Tune CPUs (unfortunately, numad doesn't seem to work on Ubuntu) this should look like:
 ```
 virt-xml kworker-1 --edit --numatune mode=strict
 virt-xml kworker-1 --edit --numatune mode=preferred,nodeset=0
