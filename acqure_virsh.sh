@@ -112,9 +112,18 @@ sudo virsh net-undefine default
 sudo virsh net-define net-default.xml
 sudo virsh net-autostart default
 sudo virsh net-start default
-sudo virsh pool-define-as default dir - - - - "/var/lib/libvirt/images"  
-sudo virsh pool-autostart default
+x=\$(lsblk -o NAME,FSTYPE -dsn | awk '\$2 == "" {print \$1}' | sed s/^/\\\/dev\\\//)
+echo "-----unpartitioned blocks-----"
+echo "\$x"
+echo "------------------------------"
+sudo pvcreate \$x
+sudo vgcreate default \$x
+sudo virsh pool-define-as default logical --target /dev/default
 sudo virsh pool-start default
+sudo virsh pool-autostart default
+# sudo virsh pool-define-as default2 dir - - - - "/var/lib/libvirt/images"
+# sudo virsh pool-autostart default2
+# sudo virsh pool-start default2
 sudo apt-get install virt-manager -y
 sudo apt-get install ubuntu-desktop gnome-panel gnome-settings-daemon metacity -y
 sudo apt-get install --no-install-recommends ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal -y
