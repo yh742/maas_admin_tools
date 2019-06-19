@@ -118,7 +118,12 @@ echo "\$x"
 echo "------------------------------"
 sudo pvcreate \$x
 sudo vgcreate default \$x
-sudo virsh pool-define-as default logical --target /dev/default
+# sudo virsh pool-define-as default logical --target /dev/default
+sudo lvcreate -l 100%FREE -n data default
+sudo mkfs.ext4 /mnt/vm
+sudo mkdir /mnt/vm
+sudo mount dev/default/data /mnt/vm
+sudo virsh pool-define-as default dir - - - - "/mnt/vm"
 sudo virsh pool-start default
 sudo virsh pool-autostart default
 # sudo virsh pool-define-as default2 dir - - - - "/var/lib/libvirt/images"
