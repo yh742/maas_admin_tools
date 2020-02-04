@@ -120,9 +120,9 @@ sudo pvcreate \$x
 sudo vgcreate default \$x
 # sudo virsh pool-define-as default logical --target /dev/default
 sudo lvcreate -l 100%FREE -n data default
-sudo mkfs.ext4 /mnt/vm
+sudo mkfs.ext4 /dev/default/data
 sudo mkdir /mnt/vm
-sudo mount dev/default/data /mnt/vm
+sudo mount /dev/default/data /mnt/vm
 sudo virsh pool-define-as default dir - - - - "/mnt/vm"
 sudo virsh pool-start default
 sudo virsh pool-autostart default
